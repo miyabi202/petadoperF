@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--指示瀏覽器以設備的寬度作為視口的寬度，並將初始縮放比例設置為 1.0。這樣做的目的是確保網頁在移動設備上以適當的大小和比例呈現，並且避免預設的縮放行為。-->
+    <title>Index_Pet</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+   
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+     <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+   
+   <!-- Popper JS -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
+<!--最新版本-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=" crossorigin="anonymous" />
+ 
+ 
+<link rel="stylesheet" href="/webjars/font-awesome/5.15.4/css/all.min.css">
+
+<!-- Font Awesome CSS 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<link rel="stylesheet" href="path/to/node_modules/@fortawesome/fontawesome-free/css/all.min.css">-->
+
+<link rel="stylesheet" href="all.css"> <!-- 引入位於 projectPet下的 all.css 文件 -->
+ <style>
+   /*.bg-custom-pink {
+      background-color: pink !important;
+    }*/
+    body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color:#F2E8DF; /* 設置整個主頁的背景色為粉橘紅色 */
+    
+        }
+        
+        /*.img-fluid{*/
+        img {
+          width: 80%; 
+            max-width: 100%;/*最大寬度*/
+            max-height: 100%;/*最大高度*/
+            width:auto; /*保持圖片比率*/
+            object-fit: contain;
+        }
+    
+    .nav-link {
+    font-size: 20px;
+    font-weight: bold; 
+}
+/* 隐藏轮播指示器 */
+.carousel-indicators {
+    display: none;
+}
+.dropdown-menu {
+    background-color:#F28585; /* 设置下拉菜单背景颜色为粉色 */
+}
+
+.socialIcon{
+  margin-top: 30px;
+}
+.socialIcon__download,
+.socialIcon__links {
+  display: grid;  
+  grid-auto-flow: column;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+/* Adjust the size of the logo */
+  .navbar-brand img {
+            width: 100px;
+            height: 100px;
+        }
+.dropdown-menu .dropdown-item {
+    color: white; /* chage the font color to white */
+}
+
+.carousel-inner img {
+            height: 42rem;
+            width: auto;           
+        }
+
+ .carousel-control-prev,                                          
+.carousel-control-next {
+    font-size: 2rem; /* 字體調整為2rem */
+  
+}
+.carousel {
+    margin-bottom: 60px; /* 增ㄐㄚ nva和輪播間距離增 */
+}
+
+.carousel-inner img {
+    max-height: 1000px; /* 圖片最大高度 */
+    min-height: 600px; /* 圖片最小高度 */
+    width: auto; /* 让寬度自動調整 */
+}
+
+
+@media (max-width: 991.98px) {
+            .navbar-nav {
+                display: none;
+            }
+
+            .navbar-toggler {
+                display: block;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .navbar-toggler {
+                display: none;
+            }
+        }
+
+        .card-text {
+    font-size: 26px; /* 调整文本大小为20像素 */
+  }
+
+  p {
+  font-size: 18px;
+}
+
+footer {
+    background-color: #F2E8Df; 
+    color: #202F56; /* 设置 footer 文本颜色 */
+    padding: 20px; /* 设置 footer內距離 */
+    margin-top:30px; /* 设置 footer 與上方内容的距離 */
+    font-size: 24px; /* 设置 footer 文字大小 */
+    font-weight: bold; /* 设置 footer 文字粗细 */
+  }
+  </style>
+
+</head>
+<body>
+<!-- Font Awesome Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-custom-pink">-->
+<div> 
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#F28585;">
+<div class="container-fluid">
+<div class="navbar-header">
+<!-- Replace text with image for logo -->
+  <a class="navbar-brand" href="#">
+  <img src="images/niniLogo.png" alt="LOGO"> </a>
+</div>
+<!-- <a class="navbar-brand" href="#">Logo</a>-->
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+ 
+ <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <!-- 導覽列項目 -->
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+ <li class="nav-item">
+ <a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+ 
+ <li class="nav-item dropdown">
+ <a class="nav-link dropdown-toggle" href="adopter.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+領養送養 </a>
+<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+ <li><a class="dropdown-item" href="./adoper.html">領養</a></li>
+ <li><a class="dropdown-item" href="./GiveAwayApply.html">送養</a></li>
+</ul> 
+<li class="nav-item">
+  <a class="nav-link" href="VolunteerForm.html">加入志工</a>
+   </li>
+
+ <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">捐款支持 </a>
+
+
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+  <li><a class="dropdown-item" href="DonationForm.html">捐款贊助</a></li>
+<li><a class="dropdown-item" href="./ShoppingCart/shoppingcart.html">義賣小舖</a></li>
+
+</ul> 
+</li>
+<li class="nav-item">
+<a class="nav-link" href="staQandA.html">Q&A</a>
+ </li>
+ 
+ <li class="nav-item">
+  <a class="nav-link" href="about.html">About</a>
+   </li>
+           
+
+</div>
+
+<!-- 其他導覽列項目 -->
+   
+    
+ <div class="d-flex ">
+	
+<!--靜態可以這樣處裡-->
+<a href="./ShoppingCart/shoppingcart.html">
+  <i id="ShoppingCartIcon" class="fas fa-shopping-bag fa-inverse fa-lg" style="cursor: pointer;"></i>
+  </a>
+  </div>
+  <!-- 增加一些小間距 -->
+   <!--bootStrap內建但還是太小了所以不使用 <div class="ms-5"></div>-->
+ <div style="width: 20px;"></div>
+
+
+<a href="./login.html">
+<i class="fas fa-user fa-inverse fa-lg"></i>
+</a> </div>
+
+</nav> 
+
+<!-- 漢堡選單按鈕-->
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<!-- NVA連接器 -->
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <!-- NVA連接 -->
+    <ul class="navbar-nav ml-auto">
+        <!-- 導航連接-->
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <!-- 其他項目連接 -->
+    </ul>
+</div>
+
+<!--輪播照片-->
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 3"></button>
+  
+  </div>
+
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/dog1.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>讓每個毛孩都有個家</h5>
+        <p>養狗狗有可能是一個15年的承諾。您真的做好心理準備了嗎？</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="images/dog2.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>讓每個毛孩都有個家</h5>
+        <p>養狗狗有可能是一個15年的承諾。您真的做好心理準備了嗎？</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="images/cat1.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>養狗狗有可能是一個15年的承諾。您真的做好心理準備了嗎？</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="images/cat2.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>讓每個毛孩都有個家</h5>
+        <p>養狗狗有可能是一個15年的承諾。您真的做好心理準備了嗎？</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="images/dog3.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>讓每個毛孩都有個家</h5>
+        <p>養狗狗有可能是一個15年的承諾。您真的做好心理準備了嗎？</p>
+      </div>
+    </div>
+
+
+    <div class="carousel-item">
+      <img src="images/dogandcat1.png" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>讓每個毛孩都有個家</h5>
+        <p>養狗狗有可能是一個15年的承諾。您真的做好心理準備了嗎？</p>
+      </div>
+    </div>
+</div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+ </div>
+ <div class="container-fluid my-10 p-4" style="padding: 20px;">
+  <h1>我們的可愛毛小孩需要您的一臂之力</h1>
+  <h2>我們追求的是，有天，在台灣的每隻狗狗，都能夠擁有一個愛他們的家。</h2>
+  <p></p>
+
+<p>創世記9:12-17 當代譯本(CCB)
+  上帝說：「我與你們及所有和你們在一起的生物立世代永存的約，這是我立約的記號。 
+  我把彩虹放在雲中，作為我跟大地立約的記號。 我使雲彩覆蓋大地的時候，
+  會有彩虹在雲中出現。 這樣我會顧念我與你們及一切有血氣的生物所立的約，
+  水就不會再氾濫、毀滅所有生命。</p>
+</div>
+
+</div> 
+</div>
+
+
+
+
+
+<div class="container" my-4>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+<!--這段代碼創建了一個具有 Bootstrap 格式的行（<div class="row">），其中包含一個具有不同列數的區塊。
+這裡的 row-cols-1 表示在小型設備上每行只顯示一列，而 row-cols-md-2 表示在中型設備上每行顯示兩列。
+g-4 則是 Bootstrap 中的間距類，用於設置列之間的間距。總之，這段代碼的目的是創建一個具有不同列數的行，以在不同大小的設備上呈現不同的版面配置。-->
+
+      <div class="col">
+        <div class="card">
+          <img src="images/product01.jpg" class="card-img-top" alt="..." style="height: 600px; object-fit: cover;">
+          <div class="card-body">
+            <h3 class="card-title">義賣小舖</h3>
+            <p class="card-text">您的支持是浪浪的幸福</p>
+            <a href="./ShoppingCart/shoppingcart.html" class="btn btn-secondary">義賣小舖</a>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="col">
+        <div class="card">
+          <img src="images/dog3.jpg" class="card-img-top" alt="..." style="height: 600px; object-fit: cover;">
+
+          
+          <div class="card-body">
+            <h3 class="card-title">支持領養</h3>
+            <p class="card-text">成為毛孩的避風港</p>
+            <a href="./adoper.html" class="btn btn-secondary">毛孩們資訊</a>
+          </div>
+       </div>
+      </div>
+
+
+
+</div>
+</div>
+
+<footer class="bg-light py-4" >
+  <div class="container">
+  <p class="mb-0"></p>
+       
+</div>
+<footer class="bg-light py-4" >
+  <div class="container">
+  <p class="mb-0">彩虹之約我愛浪浪</p>
+  <p>專題作品：讓浪浪有個家</p>
+</div>
+
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>

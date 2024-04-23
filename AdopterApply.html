@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>領養人申請表AddpterApply</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="all.css"> <!-- 引入位於 projectPet下的 all.css 文件 -->
+    <style>
+      
+        /* Adjust the size of the logo */
+        .navbar-brand img {
+            width: 100px;
+            height: 100px;
+        }
+  
+        .dropdown-menu .dropdown-item {
+            color: white; /* change the font color to white */
+        }
+        body{
+          background-color:#f2ebdf;
+        }
+        .mt-6 {
+        margin-top: 6px; /* 設置頂部間距 */
+        height: 200px; /* 設置高度 */
+    /* 其他樣式設置 */
+  }
+  .card {
+    height: 500px; /* 設置卡片的高度 */
+}
+.card-img-top {
+    width: 100%; /* 設置圖片寬度 */
+    height: 200px; /* 設置圖片高度 */
+    object-fit: cover; /* 保持圖片的長寬比例並填滿容器 */
+    overflow: hidden; /* 隱藏圖片超出容器的部分 */
+}
+.card-container {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+.image-container {
+    width: 300px; /* 設定容器的寬度 */
+    height: 220px; /* 設定容器的高度 */
+    overflow: hidden; /* 隱藏超出容器的內容 */
+    position: relative; /* 設置定位父級元素，以便後續使用絕對定位 */
+}
+
+.image-container img {
+    width: 100%; /* 圖片寬度填滿容器 */
+    height: 100%; /* 圖片高度填滿容器 */
+    object-fit: cover; /* 保持圖片的長寬比例並填滿容器 */
+    overflow: hidden;
+    position: absolute; /* 絕對定位，相對於容器 */
+    top: 0; /* 將圖片置於容器的頂部 */
+    left: 0; /* 將圖片置於容器的左側 */
+}
+
+    
+    .card-footer {
+    background-color: transparent; /* 移除底色 */
+    display: flex;
+    border: none; /* 移除卡片底部的邊框 */
+    justify-content: flex-start; /* 左對齊 */
+    padding:15px;
+}
+  /* 將每頁顯示的項目數量限制為四筆 */
+  .pagination .page-item {
+    display: block; /* 將所有分頁項目設置為可見 */
+  }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+          <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#F28585;">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <!-- Replace text with image for logo -->
+                  <a class="navbar-brand" href="#">
+                    <img src="images/niniLogo.png" alt="LOGO">
+                  </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="./adoper.html">領養</a>
+                    </li>
+                    <!--<li class="nav-item">
+                      <a class="nav-link" href="./surrenderer.html">送養</a>
+                    </li>-->
+                    <li class="nav-item">
+                      <a class="nav-link" href="./about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="./contact.html">Contact</a>
+                    </li>
+                    <!--購物車 -->
+                    <li class="nav-item">
+                      <a class="nav-link" href="./ShoppingCart/shoppingcart.html">
+                        <i class="fas fa-shopping-cart"></i>
+                      </a>
+                    </li>
+                    <!--login -->
+                    <li class="nav-item">
+                      <a class="nav-link" href="./login.html">
+                        <i class="fas fa-user"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          
+    
+    
+      </header>
+    
+
+    AdopterApply.html
+
+
+</body>
+</html>

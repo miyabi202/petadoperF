@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寵物詳情</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="all.css"> <!-- 引入位於 projectPet下的 all.css 文件 -->
+    <style>
+        /* Adjust the size of the logo */
+        .navbar-brand img {
+            width: 100px;
+            height: 100px;
+        }
+        .dropdown-menu .dropdown-item {
+            color: white; /* change the font color to white */
+        }
+        body {
+            background-color: #f2ebdf; /* Set the body background color */
+        }
+        .container {
+    position: relative;
+    width: 500px; /* 比調整條寬度更寬 */
+    height: 450px;
+
+    overflow: hidden; /* 指定區域內顯示 */
+    margin: auto;
+  }
+
+  .custom-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Allows items to wrap to the next line */
+        }
+        .container {
+            width: 100%; /* Set the width of the container to 100% */
+            margin-bottom: 20px; /* Add margin for spacing */
+        }
+        .card {
+            width: 100%; /* Set the width of the card to 100% */
+            height: auto; /* Allow the height to adjust according to content */
+        }
+       
+        .card-body {
+            width: 100%; /* Make the card body fill the container */
+            padding: 20px; /* Add padding for spacing */
+        }
+        #zoomable-image {
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+  }
+
+    </style>
+</head>
+<body> 
+
+    <header>
+      <div>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#F28585;">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <!-- Replace text with image for logo -->
+                <a class="navbar-brand" href="#">
+                  <img src="images/niniLogo.png" alt="LOGO">
+                </a>
+              </div>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./adoper.html">領養</a>
+                  </li>
+                  <!--<li class="nav-item">
+                    <a class="nav-link" href="./surrenderer.html">送養</a>
+                  </li>-->
+                  <li class="nav-item">
+                    <a class="nav-link" href="./about.html">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./contact.html">Contact</a>
+                  </li>
+                  <!--購物車 -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="./ShoppingCart/shoppingcart.html">
+                      <i class="fas fa-shopping-cart"></i>
+                    </a>
+                  </li>
+                  <!--login -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="./login.html">
+                      <i class="fas fa-user"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        
+  
+  
+    </header>
+  
+
+
+
+
+  
+  <div style="padding: 20px;"><h1>關於我的資訊</h1></div>  
+
+  <div id="app" class="custom-container">
+  
+<!-- 添加寵物的照片 -->
+<div class="container">
+
+
+<div style="width: 70vw; height: 50vh; margin: auto; overflow: hidden;">
+  <img id="zoomable-image" :src="pet.imgPath" class="card-img-top" style="width: 100%; height: 100%; object-fit: contain;" alt="pet photo">
+</div>
+
+
+</div>
+
+<div class="card" style="width: 70vh;height:50vh; margin:auto; "> 
+<!--<div class="card-body" style="width: 60%; height: auto;">-->
+    <!-- 添加狗的照片 -->
+    <!--<img :src="pet.imgPath" class="card-img-top" style="width:100%; height:auto;" alt="Pet Image">-->
+  
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">姓名：{{ pet.name }}</li>
+          <li class="list-group-item">品種：{{ pet.species }}</li>
+          <li class="list-group-item">性別：{{ pet.sex }}</li>
+          <li class="list-group-item">年齡：{{ pet.age }}</li>
+          <li class="list-group-item">體重：{{ pet.weight }}</li>
+          <li class="list-group-item">是否結紮：{{ pet.sterilize ? '是' : '否' }}</li>
+          <li class="list-group-item">地址：{{ pet.address }}</li>
+          <li class="list-group-item">來源：{{ pet.source }}</li>
+          <li class="list-group-item">簡介：{{ pet.profile }}</li>
+          <li class="list-group-item">狀態：{{ pet.status }}</li>
+          <li class="list-group-item">是否發佈：{{ pet.publish ? '是' : '否' }}</li>
+          <li class="list-group-item">檔案日期：{{ pet.fileDate }}</li>
+
+         
+        </ul>
+
+      <!-- 其他寵物資訊 -->
+  
+ <!-- footer -->
+ <footer>
+  <!-- 在這裡放置 checkbox -->
+
+  <input type="checkbox" id="checkbox" style="margin-top: 10px; margin-bottom: 10px;">
+  <label for="checkbox">養狗狗有可能是一個15年的承諾。您真的做好心理準備了嗎？</label>
+  <br>
+  
+    <button id="submitButton" class="btn btn-secondary" disabled>進入領養申請</button>
+  <!--disabled沒打勾就不能按 一開始預設禁按-->
+</footer>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const checkbox = document.getElementById('checkbox');
+  //通過 getElementById 方法獲取具有 id 為 'checkbox' 的 checkbox 元素，並將其存儲在名為 checkbox 的變數中。
+  const submitButton = document.getElementById('submitButton');
+
+//勾選後
+checkbox.addEventListener('change', function() {
+    // 如果勾選則移除disabled屬性使其可以點擊
+    if (this.checked) {
+        submitButton.removeAttribute('disabled');
+    } else {
+        // 如果沒勾選則禁用按鈕
+        submitButton.setAttribute('disabled', 'disabled');
+    }
+});
+
+//根據 checkbox 的勾選狀態來動態地啟用或禁用按鈕。如果 checkbox 被勾選，
+//則按鈕將被啟用；如果 checkbox 未被勾選，則按鈕將被禁用。這樣做的效果是，只有在用戶同意條款（勾選了 checkbox）後，才能夠點擊提交按鈕。
+submitButton.addEventListener('click', function() {
+  console.log('Submit button clicked');
+    if (!checkbox.checked) {
+        alert('請先勾選同意');
+        return;
+    }
+    window.location.href = 'AdopterApply.html';
+});
+});
+</script>
+ 
+
+<!-- 導入 Vue.js 3第一個是生產版本 第二個是開發版本 第一個比較小但少提示 -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<!--<script src="https://unpkg.com/vue@3"></script>-->
+<script>
+const app = Vue.createApp({
+  data() {
+      return {
+          pet: {}
+      };
+  },
+  mounted() {
+      // 從 URL 中獲取參數
+      const urlParams = new URLSearchParams(window.location.search);
+      const petId = urlParams.get('id');
+
+      // 根據pet的 ID 加載狗的詳情資訊
+      fetch(`http://localhost:8080/pet/${petId}`)
+          .then(response => response.json())
+          .then(data => {
+              this.pet = data;
+          })
+          .catch(error => {
+              console.error("獲取狗的詳情資訊時發生錯誤:", error);
+          });
+  }
+});
+
+app.mount('#app');
+</script>
+
+
+
+<!-- 導入 FontAwesome 的 CSS 樣式 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+ 
+ 
+                   
+</body>
+</html>
+            
+                    
+  

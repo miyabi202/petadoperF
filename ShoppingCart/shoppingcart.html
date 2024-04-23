@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cards</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Vue.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="all.css"> <!-- 引入位於 projectPet下的 all.css 文件 -->
+  <style>
+    .card {
+      width: 18rem;
+      margin: 1rem;
+    }
+ /* Adjust the size of the logo */
+ .navbar-brand img {
+            width: 100px;
+            height: 100px;
+        }
+    
+    .cart-summary {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#F28585;">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <!-- Replace text with image for logo -->
+                <a class="navbar-brand" href="#">
+                  <img src="../images/niniLogo.png" alt="LOGO">
+                </a>
+              </div>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../adoper.html">領養</a>
+                  </li>
+                  <!--<li class="nav-item">
+                    <a class="nav-link" href="./surrenderer.html">送養</a>
+                  </li>-->
+                  <li class="nav-item">
+                    <a class="nav-link" href="../about.html">About</a>
+                  </li>
+                 
+                  
+                  <!--login -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="../login.html">
+                      <i class="fas fa-user"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    
+          
+
+    
+<div id="app" class="container">
+  <div class="row" id="itemsContainer">
+    <div v-for="item in items" :key="item.itemId" class="col-md-4">
+      <div class="card">
+        <div class="image-container">
+          <!-- Wrap image inside this container -->
+          <img :src="item.imgPath" class="card-img-top" style="width: 100%; height: auto;" :alt="item.itemName + ' image'">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ item.itemName }}</h5>
+          <p class="card-text">Price: {{ item.price }}</p>
+          <p class="card-text">Quantity: {{ item.quantity }}</p>
+          <label for="quantitySelect">Quantity:</label>
+          <select id="quantitySelect" v-model="item.quantityToBuy">
+            <option v-for="quantity in item.quantity" :value="quantity">{{ quantity }}</option>
+          </select>
+          <button @click="buyNow(item)" class="btn btn-primary">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <h1>Shopping Cart</h1>
+  <div style="border: 3px solid black; display: block; width: 80vw; height: auto;"></div>
+  <ul>
+    <li v-for="cartItem in cart" :key="cartItem.itemId">
+      <span> 
+        商品名稱{{ cartItem.itemName }} (購買數量：{{ cartItem.quantityToBuy }}) - Subtotal:  NTD${{ calculateSubtotal(cartItem) }}
+        <!-- 删除按钮 -->
+        <button @click="removeFromCart(cartItem)" class="btn btn-danger">移除</button>
+      </span>
+    </li>
+  </ul>
+ 
+  <p>Total Amount: NTD${{ calculateTotal() }}</p>
+  
+  <button @click="proceedToCheckout" class="btn btn-success mt-3">前往結帳</button>
+</div>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        items: [],
+        cart: [] // 購物車陣列,用於儲存商品對象
+      }
+    },
+    mounted() {
+      this.fetchItems();
+    },
+    methods: {
+      async fetchItems() {
+        try {
+          const response = await fetch('http://localhost:8080/item');
+          const data = await response.json();
+          this.items = data.map(item => ({ ...item, quantityToBuy: 1 }));
+        } catch (error) {
+          console.error('Error fetching items:', error);
+        }
+      },
+      buyNow(item) {
+        console.log('Buying product:', item);
+        this.cart.push({ ...item, quantityToBuy: item.quantityToBuy });
+        // 存儲到本地存儲
+        /**this.cart.push({ ...item, quantityToBuy: item.quantityToBuy });:
+         *  這行程式碼將購買的產品新增到購物車物件的 cart 屬性中。它使用了 JavaScript 中
+         * 的展開運算符 (...) 來複製 item 物件的所有屬性，並添加了一個額外的屬性 quantityToBuy，
+         * 表示購買的數量，這個屬性的值就是 item.quantityToBuy 的值。
+
+localStorage.setItem('cart', JSON.stringify(this.cart));: 這行程式碼將購物車物件 cart 屬性中的資料轉換為 JSON 字串，並將其存儲在瀏覽器的本地儲存 (localStorage) 中，鍵為 'cart'。這樣做是為了在瀏覽器中保留購物車的狀態，即使用戶重新載入頁面或關閉瀏覽器後再次打開，也可以保留購物車的內容。**/
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+      },
+      /**在 buyNow 方法中，使用 
+       * localStorage.setItem('cart', JSON.stringify(this.cart)); 
+       * 將購物車數據存儲在本地存儲中。
+在 proceedToCheckout 方法中，使用 localStorage.getItem('cart')
+ 來獲取本地存儲中的購物車數據，並將其作為查詢參數添加到 URL 中，然後跳轉到結帳頁面。
+
+*/
+removeFromCart(cartItem) {
+      const index = this.cart.findIndex(item => item.itemId === cartItem.itemId);
+      if (index !== -1) {
+        this.cart.splice(index, 1);
+        // 从本地存储中移除
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+      }
+    },
+      calculateSubtotal(item) {
+        return item.price * item.quantityToBuy;
+      },
+      calculateTotal() {
+        return this.cart.reduce((total, item) => total + (item.price * item.quantityToBuy), 0);
+      },
+    
+
+          proceedToCheckout() {
+        const cartDataEncoded = localStorage.getItem('cart');
+        if (!cartDataEncoded) {
+          alert('購物車為空！');
+          return;
+        }
+        // 將購物車數據轉到另一頁
+        window.location.href = `checkout7.html?cart=${cartDataEncoded}`;
+        }
+      }
+      }
+  );
+        // 將購物車數據轉到另一頁
+       /** window.location.href = `checkout5.html?cart=${encodeURIComponent(cartDataEncoded)}`;**/
+      /***在這段程式碼中，window.location.href 是 JavaScript 中用於導航到不同 URL 的方法。
+       * 透過設置 window.location.href 屬性為新的 URL，瀏覽器將會跳轉到該 URL，並載入相應的頁面。
+        在這裡，我們使用 window.location.href 將使用者導航到 checkout2.html 頁面，並將購物車數據作為查詢參數添加到 URL 中。查詢參數是 URL 中的一部分，以 ? 開頭，通常用於向伺服器傳遞額外的資訊。
+
+在生成查詢參數時，我們使用了 encodeURIComponent() 函數對購物車數據進行編碼。這是因為購物車數據可能包含特殊字符，而查詢參數需要是 URL 安全的。encodeURIComponent() 函數可以將字串進行編碼，以便在 URL 中安全地使用。
+
+因此，整個操作的目的是將當前頁面中的購物車數據傳遞到 checkout2.html 頁面，以便在後續頁面中處理購物車數據並進行結帳流程。****/
+      
+      
+      
+
+
+  app.mount('#app');
+</script>
+
+</body>
+</html>

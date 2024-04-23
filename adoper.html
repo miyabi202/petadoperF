@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寵物領養</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="all.css"> <!-- 引入位於 projectPet下的 all.css 文件 -->
+    <style>
+      
+        /* Adjust the size of the logo */
+        .navbar-brand img {
+            width: 100px;
+            height: 100px;
+        }
+  
+        .dropdown-menu .dropdown-item {
+            color: white; /* change the font color to white */
+        }
+        body{
+          background-color:#f2ebdf;
+        }
+        .mt-6 {
+        margin-top: 6px; /* 設置頂部間距 */
+        height: 200px; /* 設置高度 */
+    /* 其他樣式設置 */
+  }
+  .card {
+    height: 500px; /* 設置卡片的高度 */
+}
+.card-img-top {
+    width: 100%; /* 設置圖片寬度 */
+    height: 200px; /* 設置圖片高度 */
+    object-fit: cover; /* 保持圖片的長寬比例並填滿容器 */
+    overflow: hidden; /* 隱藏圖片超出容器的部分 */
+}
+.card-container {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+.image-container {
+    width: 300px; /* 設定容器的寬度 */
+    height: 220px; /* 設定容器的高度 */
+    overflow: hidden; /* 隱藏超出容器的內容 */
+    position: relative; /* 設置定位父級元素，以便後續使用絕對定位 */
+}
+
+.image-container img {
+    width: 100%; /* 圖片寬度填滿容器 */
+    height: 100%; /* 圖片高度填滿容器 */
+    object-fit: cover; /* 保持圖片的長寬比例並填滿容器 */
+    overflow: hidden;
+    position: absolute; /* 絕對定位，相對於容器 */
+    top: 0; /* 將圖片置於容器的頂部 */
+    left: 0; /* 將圖片置於容器的左側 */
+}
+
+    
+    .card-footer {
+    background-color: transparent; /* 移除底色 */
+    display: flex;
+    border: none; /* 移除卡片底部的邊框 */
+    justify-content: flex-start; /* 左對齊 */
+    padding:15px;
+}
+  /* 將每頁顯示的項目數量限制為四筆 */
+  .pagination .page-item {
+    display: block; /* 將所有分頁項目設置為可見 */
+  }
+
+    </style>
+
+</head>
+<body>
+  <header>
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#F28585;">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <!-- Replace text with image for logo -->
+              <a class="navbar-brand" href="#">
+                <img src="images/niniLogo.png" alt="LOGO">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./adoper.html">領養</a>
+                </li>
+                <!--<li class="nav-item">
+                  <a class="nav-link" href="./surrenderer.html">送養</a>
+                </li>-->
+                <li class="nav-item">
+                  <a class="nav-link" href="./about.html">About</a>
+                </li>
+             
+                <!--購物車 -->
+                <li class="nav-item">
+                  <a class="nav-link" href="./ShoppingCart/shoppingcart.html">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </li>
+                <!--login -->
+                <li class="nav-item">
+                  <a class="nav-link" href="./login.html">
+                    <i class="fas fa-user"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      
+
+
+  </header>
+
+  <div class="container mt-4 " id="app" style="justify-content: flex-start;">
+    <div class="container-fluid">
+      <h1 class="my-6">寵物領養</h1>
+      <P></P>
+      <P></P>
+      <div class="row">
+        <div class="col-md-12">
+            
+          <button class="btn btn-secondary" @click="showAllPets">所有寵物</button>
+          <button class="btn btn-secondary" @click="showDogs">狗</button>
+          <button class="btn btn-secondary" @click="showCats">貓</button>
+        </div>
+</div>
+</div>
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<div class="my-6"></div>
+      <div class="row" id="petsContainer">
+        <div v-for="pet in displayedPets" :key="pet.petId" class="col-md-5">
+          <div class="card mb-4 card-container">
+            <div class="card-body">
+              <div class="image-container" > 
+                <!-- 將圖片包裹在這個容器內 -->
+              <img :src="pet.imgPath" class="card-img-top" style="width:100; height:auto;" alt="Pet Image">
+        
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">姓名 {{ pet.name }}</li>
+              <li class="list-group-item">品種 {{ pet.species }}</li>
+              <li class="list-group-item">是否結紮：{{ pet.sterilize ? '是' : '否' }}</li>
+            </ul>
+              
+            </div>
+
+            <div class="card-footer">
+              <button class="btn btn-secondary" @click="redirectToDetailPage(pet.petId)">查看詳情</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mt-6">
+      <!-- Pagination -->
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" :class="{ 'disabled': currentPage === 1 }">
+            <a class="page-link" href="#" @click.prevent="changePage(currentPage - 1)">
+                <span aria-hidden="true">&laquo;</span> <!-- 修改為左雙角引號 Previous--></a>
+          </li>
+          <li class="page-item" v-for="page in totalPages" :key="page" :class="{ 'active': page === currentPage }">
+            <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
+          </li>
+          <li class="page-item" :class="{ 'disabled': currentPage === totalPages }">
+            <a class="page-link" href="#" @click.prevent="changePage(currentPage + 1)">
+                <span aria-hidden="true">&raquo;</span> <!-- 修改為右雙角引號 Next--></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script src="https://unpkg.com/vue@3"></script>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        pets: [],
+        currentPage: 1,
+        petsPerPage: 4,
+        filteredPets: []
+      };
+    },
+    computed: {
+      displayedPets() {
+        const startIndex = (this.currentPage - 1) * this.petsPerPage;
+        const endIndex = startIndex + this.petsPerPage;
+        return this.filteredPets.slice(startIndex, endIndex);
+      },
+      totalPages() {
+        return Math.ceil(this.filteredPets.length / this.petsPerPage);
+      }
+    },
+    methods: {
+      fetchPets() {
+        fetch("http://localhost:8080/pet")
+          .then(response => response.json())
+          .then(data => {
+            this.pets = data;
+            //this.filteredPets = data;這是找出全部
+            this.filteredpets = data.filter(pet => pet.publish);//找出已經發布的寵物（資料庫的資訊）
+            // this.filteredPets = data.filter(pet => !pet.publish); // 初始時過濾未發佈的寵物
+    })
+    
+          .catch(error => {
+            console.error("Error fetching pets:", error);
+          });
+      },
+      redirectToDetailPage(petId) {
+        window.location.href = `adoptePetDetail.html?id=${petId}`;
+      },
+      changePage(page) {
+        if (page >= 1 && page <= this.totalPages) {
+    //即大於等於 1 且小於等於總頁數），如果是的話，它會將 currentPage 設置為傳入的 page。這樣就可以通過調用這個方法來改變當前顯示的頁面
+          this.currentPage = page;
+        }
+      },
+      showAllPets() {
+        this.filteredPets = this.pets;
+      },
+      showDogs() {
+        this.filteredPets = this.pets.filter(pet => pet.species === "Dog" && pet.publish);//顯示已經刊登的狗
+      },
+      showCats() {
+        this.filteredPets = this.pets.filter(pet => pet.species === "Cat" && pet.publish);//顯示已刊登的貓
+      }
+    },
+    mounted() {
+      this.fetchPets();
+    }
+  });
+
+  app.mount("#app");
+</script>
+</body>
+</html>
